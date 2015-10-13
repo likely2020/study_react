@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div id="app">
+    <script src="../js/react.min.js" ></script>
+    <script src="../js/JSXTransformer.js" ></script> <!--此处不能使用自闭合-->
+    <script type="text/jsx">
+        var ClickApp = React.createClass({
+            getInitialState:function(){
+                return {
+                    clickCount: 0
+                }
+            },
+            clickMe:function(){
+                this.setState({
+                    clickCount: this.state.clickCount + 1
+                })
+            },
+            render: function(){
+                return (
+                    <div>
+                    <h2>click</h2>
+                    <button onClick={this.clickMe}>click me</button>
+                    <p>count: {this.state.clickCount}</p>
+                    </div>
+                )
+            }
+        });
+        React.render(
+             <ClickApp/>,
+            document.getElementById('app')
+        )
+    </script>
+</div>
+</body>
+</html>

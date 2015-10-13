@@ -5,6 +5,25 @@
     <title></title>
 </head>
 <body>
-
+<div id="app">
+    <script src="../js/react.min.js" ></script>
+    <script src="../js/JSXTransformer.js" ></script> <!--此处不能使用自闭合-->
+    <script type="text/jsx">
+        var MessageBox = React.createClass({
+            alertMe:function(){
+                alert('alert');
+            },
+            render:function(){
+                return ( <h1 onClick={this.alertMe}>Hello World</h1> )//onClick={}
+            }
+        });
+        React.render( <MessageBox/>,
+            document.getElementById('app'),
+            function(){
+                console.log('done');
+            }
+        )
+    </script>
+</div>
 </body>
 </html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div id="app">
+    <script src="../js/react.min.js" ></script>
+    <script src="../js/JSXTransformer.js" ></script> <!--此处不能使用自闭合-->
+    <script type="text/jsx">
+        var MessageBox = React.createClass({
+            render:function(){
+                var sub_messages = [];
+                for(var i=0;i<10;i++){
+                    sub_messages.push(
+                            <div>
+                                <h1>Hello World</h1>
+                                <SubMessage key={i}/>
+                            </div>
+                    )
+                }
+                return (
+                        <div>
+                            <h1>Hello World</h1>
+                            {sub_messages}
+                        </div>
+                )
+            }
+        });
+        var SubMessage = React.createClass({
+            render:function(){
+                return (
+                        <div>
+                            <h3>sub components</h3>
+                            <Footer/>
+                        </div>
+                )
+            }
+        });
+        var Footer = React.createClass({
+            render:function(){
+                return (
+                        <small>small</small>
+                )
+            }
+        });
+        React.render( <MessageBox/>,
+            document.getElementById('app'),
+            function(){
+                console.log('done');
+            }
+        )
+    </script>
+</div>
+</body>
+</html>
