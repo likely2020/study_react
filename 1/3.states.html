@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div id="app">
+    <script src="../js/react.min.js" ></script>
+    <script src="../js/JSXTransformer.js" ></script> <!--此处不能使用自闭合-->
+    <script type="text/jsx">
+        var MessageBox = React.createClass({
+            getInitialState:function(){
+                return {
+                    isVisible: true,
+                    titleMessage: 'hello World!'
+                }
+            },
+            render:function(){
+                var styleObj = {
+                    display: this.state.isVisible ? 'block':'none'
+                };
+                return (
+                        <div>
+                            <h1 style={this.styleObj}>{this.state.title}</h1>
+                            <SubMessage/>
+                        </div>
+                )
+            }
+        });
+        var SubMessage = React.createClass({
+            render:function(){
+                return (
+                        <div>
+                            <h3>sub components</h3>
+                            <Footer/>
+                        </div>
+                )
+            }
+        });
+        var Footer = React.createClass({
+            render:function(){
+                return (
+                        <small>small</small>
+                )
+            }
+        });
+        var messageBox = React.render( <MessageBox/>,
+            document.getElementById('app'),
+            function(){
+                console.log('done');
+            }
+        )
+    </script>
+</div>
+</body>
+</html>

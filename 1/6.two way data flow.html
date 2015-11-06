@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div id="app">
+    <script src="../js/react-with-addons.min.js" ></script>
+    <script src="../js/JSXTransformer.js" ></script> <!--此处不能使用自闭合-->
+    <script type="text/jsx">
+        var EasyForm = React.createClass({
+            mixins: [React.addons.LinkedStateMixin],
+            getInitialState:function(){
+                return {
+                    message: 'react is awesome!',
+                    isReactAwesome:true
+                }
+            },
+            render:function(){
+                return (
+                    <div>
+                        <h1>say: {this.state.message} </h1>
+                        <h2> {this.state.isReactAwesome?'true':'false'} </h2>
+                        <input type="text" valueLink={this.linkState('message')} />
+                        <input type="checkbox" checkedLink={this.linkState('isReactAwesome')} />
+                        <SubComp messageLink={this.linkState('message')} likeLink={this.linkState('isReactAwesome')} />
+                    </div>
+                )
+            }
+        });
+        var SubComp = React.createClass({
+            render:function(){
+                return (
+                    <div>
+                        <h3>this is a component</h3>
+                        <SubSubComp { ...this.props } />
+                    </div>
+                )
+            }
+        });
+        var SubSubComp = React.createClass({
+            render:function(){
+                return (
+                    <div>
+                        <p>what's ?</p>
+                        <input type="text" valueLink={this.props.messageLink} />
+                        <input type="checkbox" checkedLink={this.props.likeLink} />
+                    </div>
+                )
+            }
+        });
+        React.render(
+            <EasyForm/>,
+            document.getElementById('app')
+        )
+    </script>
+</div>
+</body>
+</html>

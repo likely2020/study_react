@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div id="app">
+    <script src="../js/react.min.js" ></script>
+    <script src="../js/JSXTransformer.js" ></script> <!--此处不能使用自闭合-->
+    <script type="text/jsx">
+        var FormApp = React.createClass({
+            getInitialState:function(){
+                return {
+                    inputValue: 'input value',
+                    selectValue: 'A',
+                    radioValue: 'B',
+                    checkValue: 'A',
+                    textareaValue: 'some text here...'
+                }
+            },
+            handleRadio:function(e){
+              this.setState({
+                  radioValue: e.target.value
+              })
+            },
+            handleCheck:function(e){
+                this.setState({
+                    checkValue: e.target.value
+                })
+            },
+            handleSubmit:function(e){
+                e.preventDefault();
+                var formData={
+                    input: this.refs.goodInput.getDOMNode().value,
+                    select:this.refs.goodType.getDOMNode().value,
+                    textarea:this.refs.goodDesc.getDOMNode().value,
+                    radioValue:this.state.radioValue,
+                    checkValue:this.state.checkValue
+                };
+                console.log(formData)
+            },
+            render: function(){
+                return (
+                    <form onSubmit={this.handleSubmit}>
+                        <input type="text" ref="goodInput" defaultValue={this.state.inputValue} /><br/>
+                        <select ref="goodType" defaultValue={this.state.selectValue}>
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                            <option value="C">C</option>
+                            <option value="D">D</option>
+                            <option value="E">E</option>
+                        </select>
+                        <RadioButtons handleRadio={this.handleRadio}/>
+                        <CheckBoxes handleCheck={this.handleCheck}/>
+                        <textarea ref="goodDesc" defaultValue={this.state.textareaValue} />
+                        <input type="submit" value="submit" />
+                    </form>
+                )
+            }
+        });
+        var RadioButtons = React.createClass({
+           render:function(){
+               return (
+                   <span>
+                       <input onChange={this.props.handleRadio} name="goodRadio" type="radio" value="A" />
+                       <input onChange={this.props.handleRadio} name="goodRadio" type="radio" value="B" />
+                       <input onChange={this.props.handleRadio} name="goodRadio" type="radio" value="C" />
+                       <input onChange={this.props.handleRadio} name="goodRadio" type="radio" value="D" />
+                       <input onChange={this.props.handleRadio} name="goodRadio" type="radio" value="E" />
+                   </span>
+               )
+           }
+        });
+        var CheckBoxes = React.createClass({
+           render:function(){
+               return (
+                   <span>
+                       <input onChange={this.props.handleCheck} name="checkBox" type="checkbox" value="A" />
+                       <input onChange={this.props.handleCheck} name="checkBox" type="checkbox" value="B" />
+                       <input onChange={this.props.handleCheck} name="checkBox" type="checkbox" value="C" />
+                   </span>
+               )
+           }
+        });
+        React.render(
+             <FormApp/>,
+            document.getElementById('app')
+        )
+    </script>
+</div>
+</body>
+</html>
